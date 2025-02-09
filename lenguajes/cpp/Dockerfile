@@ -1,30 +1,22 @@
-# Primera etapa: Compilación
-FROM golang:latest AS builder
+# Usa la imagen base de Debian
+FROM debian:latest
+
+# Instala GCC, Make y Boost
+RUN apt-get update && apt-get install -y \
+    g++ \
+    make \
+    libboost-all-dev
 
 # Crea el directorio de trabajo
 WORKDIR /app
 
 # Copia el código fuente al contenedor
-COPY main.go .
+COPY main.cpp /main.cpp
 
-# Inicializa un módulo de Go
-RUN go mod init app && go mod tidy
+RUN g++ -o /main /main.cpp
 
-# Compila el código y genera el ejecutable
-RUN go build -o main main.go
-
-# Segunda etapa: Contenedor mínimo para ejecutar el binario
-FROM debian:latest
-
-# Crea el directorio de trabajo
-WORKDIR /app
-
-# Copia el binario compilado desde la etapa anterior
-COPY --from=builder /app/main /app/main
-
-# Ejecuta el binario
-CMD ["/app/main"]
-
+# Ejecuta el código
+CMD ["sh", "-c", "/main"]
 
 
 

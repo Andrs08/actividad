@@ -1,1 +1,2 @@
-python: 1.31 ms
+Resultado:         
+Tiempo: 1.29 ms

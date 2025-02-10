@@ -22,5 +22,6 @@ const tiempoMs = Number(end - start) / 1e6;
 fs.writeFileSync("resultado.txt", `Resultado: ${resultado}\nTiempo: ${tiempoMs.toFixed(2)} ms\n`);
 
 // Imprimir resultado y tiempo en pantalla
+console.log(`Resultado: ${resultado}`);
 console.log(`Tiempo: ${tiempoMs.toFixed(2)} ms`);
  

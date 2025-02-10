@@ -19,6 +19,7 @@ public class Main {
         }
 
         // Imprimir resultado y tiempo en pantalla
+        System.out.println("Resultado: " + resultado);
         System.out.printf("Tiempo: %.2f ms%n", tiempoMs);
     }
 

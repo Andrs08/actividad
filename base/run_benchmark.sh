@@ -23,13 +23,23 @@ for lang in */ ; do
     mkdir -p "/actividad/lenguajes/$lang_clean"
 
     # Ejecuta el contenedor con un volumen montado para persistir los resultados
-    tiempo=$(docker run --rm -v "/actividad/lenguajes/$lang_clean:/benchmark/lenguajes/$lang_clean" benchmark-$lang_clean | sed -n 's/.*Tiempo: \([0-9.]* ms\)/\1/p')
+    output=$(docker run --rm -v "/actividad/lenguajes/$lang_clean:/benchmark/lenguajes/$lang_clean" benchmark-$lang_clean)
 
-    # Guarda el resultado en el archivo de tiempos global
+    # Extraer el resultado y el tiempo de la salida del contenedor
+    resultado=$(echo "$output" | awk -F'Resultado: ' '{print $2}' | tr -d '\r')
+    tiempo=$(echo "$output" | awk -F'Tiempo: ' '{print $2}' | tr -d '\r')
+
+    # Verificar si el resultado está vacío, si es así, tomarlo de resultado.txt anterior
+    if [[ -z "$resultado" ]]; then
+        resultado=$(cat "/actividad/lenguajes/$lang_clean/resultado.txt" | grep "Resultado:" | cut -d ":" -f2-)
+    fi
+
+    # Guarda el resultado en el archivo de tiempos generales
     echo "$lang_clean: $tiempo" >> $RESULTS_FILE
 
-    # Escribe el tiempo en resultado.txt dentro de la carpeta del lenguaje
-    echo "$lang_clean: $tiempo" > "/actividad/lenguajes/$lang_clean/resultado.txt"
+    # Escribir en resultado.txt manteniendo el resultado y actualizando el tiempo
+    echo "Resultado: $resultado" > "/actividad/lenguajes/$lang_clean/resultado.txt"
+    echo "Tiempo: $tiempo" >> "/actividad/lenguajes/$lang_clean/resultado.txt"
 done
 
 # Mostrar los tiempos finales en pantalla

@@ -1,1 +1,2 @@
-javascript: 4.72 ms
+Resultado:         
+Tiempo: 6.97 ms

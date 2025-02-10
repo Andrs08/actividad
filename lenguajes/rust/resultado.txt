@@ -1,1 +1,2 @@
-rust: 0.59 ms
+Resultado:         
+Tiempo: 0.55 ms

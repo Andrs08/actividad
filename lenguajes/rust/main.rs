@@ -39,6 +39,7 @@ fn main() {
 
     // Imprimir resultado y tiempo en pantalla
     println!("Tiempo: {:.2} ms", tiempo_ms);
+    println!("Resultado: {}", resultado);
 }
 
  

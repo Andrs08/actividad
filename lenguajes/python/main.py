@@ -18,5 +18,6 @@ with open("resultado.txt", "w") as f:
     f.write(f"Tiempo: {((fin - inicio) * 1000):.2f} ms\n")
 
 # Imprimir el resultado y el tiempo en pantalla
+print(f"Resultado: {resultado}")
 print(f"Tiempo: {((fin - inicio) * 1000):.2f} ms")
  

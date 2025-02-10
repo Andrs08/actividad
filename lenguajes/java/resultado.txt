@@ -1,1 +1,2 @@
-java: 5.77 ms
+Resultado:         
+Tiempo: 10.77 ms

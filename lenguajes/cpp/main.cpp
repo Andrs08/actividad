@@ -38,6 +38,7 @@ int main() {
     }
 
     // Imprimir en pantalla
+    cout << "Resultado: " << resultado << endl;
     cout << "Tiempo: " << tiempoMs << " ms" << endl;
 
     return 0;
